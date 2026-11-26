@@ -60,6 +60,11 @@ def series(version):
 
 def update(cfg, host, apply, report):
     prefix=host["credentials"]
+    env_host = os.environ.get(f"{prefix}_HOST", "").strip()
+    if not env_host:
+        raise ValueError(f"Host não cadastrado no .env: {prefix}_HOST")
+    if env_host.casefold() != host["name"].casefold():
+        raise ValueError(f"Host divergente: YAML={host['name']}, ENV={env_host}")
     with paramiko.SSHClient() as client:
         client.load_system_host_keys()
         client.load_host_keys(str(Path(cfg["known_hosts"]).expanduser()))
