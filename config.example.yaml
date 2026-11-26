@@ -1,0 +1,13 @@
+apply: false
+known_hosts: '~/.ssh/known_hosts'
+forticlient: 'C:\Program Files\Fortinet\FortiClient\FortiVPN.exe'
+recipients:
+  - ti@example.com
+vpn:
+  VPN1: {profile: 'VPN 1'}
+  VPN2: {profile: 'VPN 2'}
+  VPN3: {profile: 'VPN 3'}
+hosts:
+  - {name: VM01, ip: 10.0.1.10, port: 22, vpn: VPN1, credentials: SSH_VM01}
+  - {name: VM02, ip: 10.0.2.10, port: 22, vpn: VPN2, credentials: SSH_VM02}
+  - {name: VM03, ip: 10.0.3.10, port: 22, vpn: VPN3, credentials: SSH_VM03}
